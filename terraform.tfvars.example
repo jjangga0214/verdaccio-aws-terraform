@@ -1,0 +1,9 @@
+aws_region           = "ap-northeast-2"
+aws_az               = "ap-northeast-2c"
+aws_instance_type    = "t2.micro"
+aws_key_pair_name    = "verdaccio-keypair"
+ssh_public_key_path  = "/home/user/.ssh/id_rsa.pub"
+ssh_private_key_path = "/home/user/.ssh/id_rsa"
+ssh_user             = "ubuntu"
+protocol             = "tcp"
+port                 = 4873

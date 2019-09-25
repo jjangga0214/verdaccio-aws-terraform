@@ -44,21 +44,16 @@ resource "aws_instance" "verdaccio_server" {
   }
 
   provisioner "file" {
-    source      = "docker-install.sh"
-    destination = "/verdaccio/docker-install.sh"
-  }
-
-  provisioner "file" {
-    source      = "docker-run.sh"
-    destination = "/verdaccio/docker-run.sh"
+    # trailing slash("/") matters. [ref](https://www.terraform.io/docs/provisioners/file.html#directory-uploads)
+    source      = "docker/"
+    destination = "/verdaccio"
   }
   
   provisioner "remote-exec" {
     inline = [
       "sudo chmod +x /verdaccio/docker-install.sh",
-      "sudo chmod +x /verdaccio/docker-run.sh",
       "sudo /verdaccio/docker-install.sh",
-      "sudo /verdaccio/docker-run.sh",
+      "sudo docker-compose --project-name verdaccio --file /verdaccio/docker-compose.yml up -d",
     ]
   }
 }
